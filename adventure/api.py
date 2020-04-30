@@ -83,5 +83,6 @@ def get_player_room(request):
     #SQL select current_room from adventure_player where id = (select id from authtoken_token where key = key)
     player = request.user.player
     player_id = player.id
-    player_room = Player.objects.get(id=player_id).current_room.values()
-    return JsonResponse({'player_room':list(player_room)}, safe=True)
+    print(player_id)
+    player_room = Player.objects.get(id=player_id).currentRoom
+    return JsonResponse({'player_room':player_room}, safe=True)
