@@ -69,7 +69,7 @@ def say(request):
 
 @csrf_exempt
 @api_view(["GET"])
-def get_rooms(rooms):
+def get_rooms(request):
     # IMPLEMENT
     rooms = Room.objects.all().values()
     #Get this data from database
