@@ -74,3 +74,14 @@ def get_rooms(request):
     rooms = Room.objects.all().values()
     #Get this data from database
     return JsonResponse({'rooms':list(rooms)}, safe=True)
+
+@csrf_exempt
+@api_view(["GET"])
+def get_player_room(request):
+    # IMPLEMENT
+    #Get this data from database
+    #SQL select current_room from adventure_player where id = (select id from authtoken_token where key = key)
+    player = request.user.player
+    player_id = player.id
+    player_room = Player.objects.get(id=player_id).current_room.values()
+    return JsonResponse({'player_room':player_room)}, safe=True)
