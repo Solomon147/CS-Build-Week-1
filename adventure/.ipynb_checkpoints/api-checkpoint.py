@@ -84,4 +84,4 @@ def get_player_room(request):
     player = request.user.player
     player_id = player.id
     player_room = Player.objects.get(id=player_id).current_room.values()
-    return JsonResponse({'player_room':player_room}, safe=True)
+    return JsonResponse({'player_room':list(player_room)}, safe=True)
