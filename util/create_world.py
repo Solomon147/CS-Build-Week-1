@@ -21,6 +21,42 @@ r_treasure = Room(title="Treasure Chamber", description="""You've found the long
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south.""")
 
+class World:
+
+    def init_grid(self):
+        self.height = 10
+        self.grid = [None] * self.height
+        self.width = 10
+        self.previous_room = None
+
+        for i in range(len(self.grid)):
+            self.grid[i] = [None] * self.width
+
+    def generate_rooms(self):
+        for i in range(self.width):
+            for j in range(self.height):
+                room_name = "Room" + str(i) + str(j)
+                self.grid[i,j] = Room(title=room_name, description=room_name)
+                self.grid[i,j].save()
+
+    def make_random_connections(self):
+        for i in range(80):
+            row_num = randint(1,10)
+            col_num = randint(1,10)
+            direction_list = ["s", "n", "e", "w"]
+            direction = random.choice(direction_list)
+            if (direction == s) and (j < 10):
+                new_room = self.grid[i, j+1]
+            elif (direction == n) and (j > 1):
+                new_room = self.grid[i, j-1]
+            elif (direction == w) and (i > 1):
+                new_room = self.grid[i-1, j]
+            elif (direction == e) and (i < 10):
+                new_room = self.grid[i+1, j]
+            self.grid[row_num, col_num].connectRooms(new_room, direction)
+
+world = World()
+
 r_outside.save()
 r_foyer.save()
 r_overlook.save()
